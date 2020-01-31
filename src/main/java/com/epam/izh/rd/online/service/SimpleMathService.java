@@ -13,7 +13,14 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int compare(int value1, int value2) {
-        return -2;
+        int result = 0;
+        if(value1 == value2)
+            result =  0;
+        else if (value1 < value2)
+            result = -1;
+        else if (value1 > value2)
+            result = 1;
+        return result;
     }
 
     /**
@@ -22,7 +29,12 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int value1, int value2) {
-        return -1;
+        int answer = 0;
+        if (value1 > value2)
+            answer = value1;
+        else if (value2 > value1)
+            answer = value2;
+        return answer;
     }
 
     /**
@@ -31,7 +43,14 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int maxFrom(int[] values) {
-        return -1;
+        int max = values[0];
+        for (int i = 1;i<values.length;i++){
+            if(values[i-1] >= values[i])
+                max = values[i-1];
+            else
+                max = values[i];
+        }
+        return max;
     }
 
     /**
@@ -40,7 +59,11 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int sum(int[] values) {
-        return -1;
+        int sum = 0;
+        for(int i = 0;i < values.length; i++){
+            sum += values[i];
+        }
+        return sum;
     }
 
     /**
@@ -49,7 +72,20 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] getEvenDigits(int[] values) {
-        return new int[]{};
+        int size = 0;
+        for(int i = 0; i<values.length;i++) {
+            if (values[i] % 2 == 0) {
+                size = size + 1;
+            }
+        }
+        int [] array = new int[size];
+        for(int i = 0,j = 0;i<values.length;i++) {
+            if (values[i] % 2 == 0) {
+                array[j] = values[i];
+                j++;
+            }
+        }
+        return array;
     }
 
     /**
@@ -59,7 +95,10 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFactorial(int initialVal) {
-        return -1L;
+        int factorial = 1;
+        for(int i = initialVal; i > 0; i-- )
+            factorial *=i;
+        return factorial;
     }
 
     /**
@@ -74,7 +113,19 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public long calcFibonacci(int number) {
-        return -1L;
+        int num1 = 0;
+        int num2 = 1;
+        int num3 = 0;
+        if (number == 0)
+            num2 = 0;
+        else{
+            for (int i = 2; i <= number; ++i) {
+                num3 = num1 + num2;
+                num1 = num2;
+                num2 = num3;
+            }
+        }
+        return num2;
     }
 
     /**
@@ -83,7 +134,16 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] sort(int[] values) {
-        return new int[]{};
+        for(int i = values.length -1 ;i > 0;i--){
+            for(int j = 0;j < i;j++){
+                if(values[j]>values[j+1]){
+                    int x = values[j];
+                    values[j] = values[j+1];
+                    values[j+1] = x;
+                }
+            }
+        }
+        return values;
     }
 
     /**
@@ -94,7 +154,12 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public boolean isPrimary(int number) {
-        return false;
+        boolean isPr = true;
+        for(int i = 2;i < number;i++){
+            if(number %i == 0)
+                isPr = false;
+        }
+        return isPr;
     }
 
     /**
@@ -104,6 +169,11 @@ public class SimpleMathService implements MathService {
      */
     @Override
     public int[] reverseArray(int[] values) {
-        return new int[]{};
+        for(int i = 0;i<values.length/2;i++){
+            int x = values[i];
+            values[i] = values[values.length-1-i];
+            values[values.length-1-i] = x;
+        }
+        return values;
     }
 }
